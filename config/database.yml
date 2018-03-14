@@ -3,7 +3,7 @@ default: &default
   encoding: utf8
   username: roger
   password: D4b2m13
-  host: db
+  host: localhost
 
 development:
   <<: *default
