@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :company do
-    account
-    account
+  factory :transaction do
+    amount 10000.00
   end
 end

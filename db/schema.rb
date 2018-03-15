@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20180314215650) do
 
   create_table "account_relations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "parent_account_id"
-    t.integer "subsidiary_account_id"
+    t.integer "parent_account_id", null: false
+    t.integer "subsidiary_account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_account_id"], name: "index_account_relations_on_parent_account_id"
@@ -22,19 +22,18 @@ ActiveRecord::Schema.define(version: 20180314215650) do
   end
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name", limit: 70
-    t.integer "status"
-    t.integer "kind"
-    t.bigint "person_id"
-    t.decimal "amount_holded", precision: 10
+    t.integer "status", null: false
+    t.integer "kind", null: false
+    t.bigint "person_id", null: false
+    t.decimal "amount_holded", precision: 8, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_accounts_on_person_id"
   end
 
   create_table "aports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "code"
-    t.bigint "transaction_id"
+    t.string "code", null: false
+    t.bigint "transaction_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_aports_on_code"
@@ -42,33 +41,33 @@ ActiveRecord::Schema.define(version: 20180314215650) do
   end
 
   create_table "legal_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "cnpj", limit: 14
-    t.string "social_reason", limit: 70
-    t.bigint "person_id"
+    t.string "cnpj", limit: 14, null: false
+    t.string "social_reason", limit: 70, null: false
+    t.bigint "person_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_legal_people_on_person_id"
   end
 
   create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name", limit: 70
+    t.string "name", limit: 70, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "physical_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "cpf", limit: 11
-    t.date "birthdate"
-    t.bigint "person_id"
+    t.string "cpf", limit: 11, null: false
+    t.date "birthdate", null: false
+    t.bigint "person_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_physical_people_on_person_id"
   end
 
   create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "origin_account_id"
-    t.integer "destiny_account_id"
-    t.decimal "amount", precision: 10
+    t.integer "origin_account_id", null: false
+    t.integer "destiny_account_id", null: false
+    t.decimal "amount", precision: 8, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["destiny_account_id"], name: "index_transactions_on_destiny_account_id"

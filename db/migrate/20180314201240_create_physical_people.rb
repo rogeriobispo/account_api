@@ -1,9 +1,9 @@
 class CreatePhysicalPeople < ActiveRecord::Migration[5.1]
   def change
     create_table :physical_people do |t|
-      t.string :cpf, limit: 11
-      t.date :birthdate
-      t.references :person, foreign_key: true
+      t.string :cpf, limit: 11, null: false
+      t.date :birthdate, null: false
+      t.references :person, foreign_key: true, null: false
 
       t.timestamps
     end
