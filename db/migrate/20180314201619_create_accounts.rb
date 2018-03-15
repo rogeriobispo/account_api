@@ -1,11 +1,10 @@
 class CreateAccounts < ActiveRecord::Migration[5.1]
   def change
     create_table :accounts do |t|
-      t.string :name, limit: 70
-      t.integer :status
-      t.integer :kind
-      t.references :person, foreign_key: true
-      t.decimal :amount_holded
+      t.integer :status, null: false
+      t.integer :kind, null: false
+      t.references :person, foreign_key: true, null: false
+      t.decimal :amount_holded, precision: 8, scale: 2, null: false
 
       t.timestamps
     end

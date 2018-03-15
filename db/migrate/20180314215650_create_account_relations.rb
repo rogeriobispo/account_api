@@ -1,8 +1,8 @@
 class CreateAccountRelations < ActiveRecord::Migration[5.1]
   def change
     create_table :account_relations do |t|
-      t.integer :parent_account_id
-      t.integer :subsidiary_account_id
+      t.integer :parent_account_id, null: false
+      t.integer :subsidiary_account_id, null: false
 
       t.timestamps
     end
