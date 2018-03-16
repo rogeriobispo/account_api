@@ -1,7 +1,5 @@
 class AccountRelation < ApplicationRecord
-  belongs_to :parent_account, class_name: 'Account',
-                              foreign_key: 'parent_account_id'
-  belongs_to :subsidiary_account, class_name: 'Account',
-                                  foreign_key: 'subsidiary_account_id'
-  validates :parent_account_id, :subsidiary_account_id, presence: true
+  belongs_to :above_ac, class_name: 'Account'
+  belongs_to :below_ac, class_name: 'Account'
+  validates :above_ac, :below_ac, presence: true
 end
