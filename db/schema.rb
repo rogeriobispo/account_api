@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314215650) do
+ActiveRecord::Schema.define(version: 20180315191824) do
 
   create_table "account_relations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "parent_account_id", null: false
@@ -21,11 +21,22 @@ ActiveRecord::Schema.define(version: 20180314215650) do
     t.index ["subsidiary_account_id"], name: "index_account_relations_on_subsidiary_account_id"
   end
 
+  create_table "account_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "origin_account_id", null: false
+    t.integer "destiny_account_id", null: false
+    t.decimal "amount", precision: 8, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.index ["destiny_account_id"], name: "index_account_transactions_on_destiny_account_id"
+    t.index ["origin_account_id"], name: "index_account_transactions_on_origin_account_id"
+  end
+
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "status", null: false
     t.integer "kind", null: false
     t.bigint "person_id", null: false
-    t.decimal "amount_holded", precision: 8, scale: 2, null: false
+    t.decimal "amount_holded", precision: 8, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_accounts_on_person_id"
@@ -33,11 +44,11 @@ ActiveRecord::Schema.define(version: 20180314215650) do
 
   create_table "aports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code", null: false
-    t.bigint "transaction_id", null: false
+    t.bigint "account_transaction_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_transaction_id"], name: "index_aports_on_account_transaction_id"
     t.index ["code"], name: "index_aports_on_code"
-    t.index ["transaction_id"], name: "index_aports_on_transaction_id"
   end
 
   create_table "legal_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -64,18 +75,8 @@ ActiveRecord::Schema.define(version: 20180314215650) do
     t.index ["person_id"], name: "index_physical_people_on_person_id"
   end
 
-  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "origin_account_id", null: false
-    t.integer "destiny_account_id", null: false
-    t.decimal "amount", precision: 8, scale: 2, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["destiny_account_id"], name: "index_transactions_on_destiny_account_id"
-    t.index ["origin_account_id"], name: "index_transactions_on_origin_account_id"
-  end
-
   add_foreign_key "accounts", "people"
-  add_foreign_key "aports", "transactions"
+  add_foreign_key "aports", "account_transactions"
   add_foreign_key "legal_people", "people"
   add_foreign_key "physical_people", "people"
 end
