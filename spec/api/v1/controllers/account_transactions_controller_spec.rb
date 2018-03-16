@@ -37,12 +37,12 @@ RSpec.describe Api::V1::AccountTransactionsController, type: :request do
         @account_transaction = create(:account_transaction, amount: 10.0)
         @account_transaction.origin_account.amount_holded = 100.00
         @account_transaction.origin_account.save
-        @account_transaction.destiny_account.amount_holded =90.00
+        @account_transaction.destiny_account.amount_holded = 90.00
         @account_transaction.destiny_account.save
         delete "/api/v1/account_transactions/#{@account_transaction.id}"
         @account_transaction.reload
         expect(@account_transaction.status).to eq('reverted')
-        end
+      end
     end
   end
 end

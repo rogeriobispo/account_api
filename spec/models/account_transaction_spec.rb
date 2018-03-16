@@ -21,7 +21,9 @@ RSpec.describe AccountTransaction, type: :model do
       origin_amount = @account_transaction.origin_account.amount_holded
       destiny_amount = @account_transaction.destiny_account.amount_holded
       @account_transaction.reverse?
+
       expect(@account_transaction.origin_account.amount_holded).to eq(origin_amount + transaction_amount)
+
       expect(@account_transaction.destiny_account.amount_holded).to eq(destiny_amount - transaction_amount)
     end
   end

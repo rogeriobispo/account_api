@@ -25,7 +25,6 @@ RSpec.describe Account, type: :model do
         expect(@account.amount_holded.to_i).to eq(100)
       end
     end
-
   end
 
   describe '#credit' do

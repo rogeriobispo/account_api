@@ -7,7 +7,7 @@ class AccountTransaction < ApplicationRecord
   enum status: [:created, :reverted]
 
   def reverse?
-   perfom_reversion if able_to_reverse?
+    perfom_reversion if able_to_reverse?
   end
 
   private
@@ -26,7 +26,8 @@ class AccountTransaction < ApplicationRecord
   end
 
   def new_transaction(origin, destiny, amount)
-    AccountTransaction.create(origin_account: origin, destiny_account: destiny, amount: amount)
-
+    AccountTransaction.create(origin_account: origin,
+                              destiny_account: destiny,
+                              amount: amount)
   end
 end
