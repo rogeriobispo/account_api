@@ -43,4 +43,23 @@ RSpec.describe Account, type: :model do
       expect(@account.debit_permited?(10)).to be_truthy
     end
   end
+
+  describe '#next' do
+    it 'when account has a child account' do
+      parent_account = create(:parent_account)
+      subsidiary_account = create(:subsidiary_account)
+      AccountRelation.create(above_ac: parent_account, below_ac: subsidiary_account)
+      expect(parent_account.next).to include(subsidiary_account)
+    end
+  end
+
+
+  describe '#previous' do
+    it 'when account has a parent account' do
+      parent_account = create(:parent_account)
+      subsidiary_account = create(:subsidiary_account)
+      AccountRelation.create(above_ac: parent_account, below_ac: subsidiary_account)
+      expect(subsidiary_account.previous).to include(parent_account)
+    end
+  end
 end

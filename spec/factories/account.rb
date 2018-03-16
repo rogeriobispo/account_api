@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :account do
-    status 1
+    status 0
     kind 1
     person
 
@@ -19,6 +19,7 @@ FactoryBot.define do
 
     factory :parent_account do
       person
+      kind 0
       after(:create) do |ac|
         ac.credit(5000.00)
       end
@@ -35,6 +36,18 @@ FactoryBot.define do
       after(:create) do |ac|
         ac.credit(100.00)
       end
+    end
+
+    factory :active_account do
+     status 0
+    end
+
+    factory :blocked_account do
+     status 1
+    end
+
+    factory :canceled_account do
+     status 2
     end
   end
 end
