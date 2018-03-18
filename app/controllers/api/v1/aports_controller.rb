@@ -1,6 +1,6 @@
 module Api
   module V1
-    class AportController < ApiController
+    class AportsController < ApiController
       before_action :set_aport, only: [:show]
       before_action :aport_by_code, only: [:revert]
 

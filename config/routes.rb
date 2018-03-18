@@ -5,8 +5,8 @@ Rails.application.routes.draw do
           get 'revert', on: :member
       end
 
-      post '/aport/revert', to: 'aport#revert'
-      resources :aport, only: [:create, :show] do
+      post '/aports/revert', to: 'aports#revert'
+      resources :aports, only: [:create, :show] do
       end
     end
   end
