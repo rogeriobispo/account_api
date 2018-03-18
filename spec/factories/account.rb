@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :account do
     status 0
     kind 1
-    person
+    client { create(:client, :phy_person) }
 
     factory :origin_account do
       after(:create) do |ac|
@@ -11,14 +11,14 @@ FactoryBot.define do
     end
 
     factory :destiny_account do
-      person
+      client { create(:client, :phy_person) }
       after(:create) do |ac|
         ac.credit(4000.00)
       end
     end
 
     factory :parent_account do
-      person
+      client { create(:client, :leg_person) }
       kind 0
       after(:create) do |ac|
         ac.credit(5000.00)
@@ -26,7 +26,7 @@ FactoryBot.define do
     end
 
     factory :subsidiary_account do
-      person
+
       after(:create) do |ac|
         ac.credit(4000.00)
       end

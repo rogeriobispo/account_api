@@ -1,4 +1,14 @@
 class PhysicalPerson < ApplicationRecord
-  belongs_to :person
-  validates :cpf, :person, :birthdate, presence: true
+  has_one :client
+  has_one :client, as: :person
+  validates :cpf, :birthdate, presence: true
+
+  def formated_person
+    {
+      id: self.client.id,
+      name: self.client.name,
+      cpf: self.cpf,
+      birthdate: self.birthdate
+     }
+  end
 end
