@@ -1,5 +1,5 @@
 class AccountRelation < ApplicationRecord
-  belongs_to :above_ac, class_name: 'Account'
-  belongs_to :below_ac, class_name: 'Account'
-  validates :above_ac, :below_ac, presence: true
+  belongs_to :parent_account, class_name: 'Account'
+  belongs_to :subsidiary_account, class_name: 'Account'
+  validates :parent_account, :subsidiary_account, presence: true
 end

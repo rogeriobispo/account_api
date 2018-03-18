@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(version: 20180318100910) do
 
   create_table "account_relations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "above_ac_id", null: false
-    t.integer "below_ac_id", null: false
+    t.integer "parent_account_id", null: false
+    t.integer "subsidiary_account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["above_ac_id"], name: "index_account_relations_on_above_ac_id"
-    t.index ["below_ac_id"], name: "index_account_relations_on_below_ac_id"
+    t.index ["parent_account_id"], name: "index_account_relations_on_parent_account_id"
+    t.index ["subsidiary_account_id"], name: "index_account_relations_on_subsidiary_account_id"
   end
 
   create_table "account_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

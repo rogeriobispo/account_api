@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       post '/aports/revert', to: 'aports#revert'
       resources :aports, only: [:create, :show]
 
+      resource :account_relations, only: [:create, :destroy]
+
       resources :clients, only: [:create, :show, :destroy,:update]
     end
   end
