@@ -39,15 +39,15 @@ FactoryBot.define do
     end
 
     factory :active_account do
-     status 0
+      status 0
     end
 
     factory :blocked_account do
-     status 1
+      status 1
     end
 
     factory :canceled_account do
-     status 2
+      status 2
     end
   end
 end

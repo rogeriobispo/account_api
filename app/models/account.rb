@@ -16,18 +16,14 @@ class Account < ApplicationRecord
   end
 
   def debit_permited?(amount)
-    true if amount_holded > amount
+    true if self.amount_holded > amount
   end
 
   def next
     Account.where(id: below_ac.all.pluck(:below_ac_id))
   end
 
-
   def previous
     Account.where(id: above_ac.all.pluck(:above_ac_id))
-  end
-
-  def relation_tree
   end
 end

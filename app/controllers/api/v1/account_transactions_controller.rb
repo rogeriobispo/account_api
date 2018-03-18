@@ -1,9 +1,9 @@
 module Api
   module V1
     class AccountTransactionsController < ApiController
-      before_action :set_account_transaction, only: [:destroy]
+      before_action :set_account_transaction, only: [:destroy, :revert, :show]
       def create
-        acc_transaction = AccountTransaction.new(account_transaction_params)
+        acc_transaction = AccountTransaction.new(false, ac_transaction_params)
         if acc_transaction.save
           render json: acc_transaction
         else
@@ -11,18 +11,22 @@ module Api
         end
       end
 
-      def destroy
+      def revert
         if @account_transaction.created? && @account_transaction.reverse?
-          render json: true
+          render json: @account_transaction
         else
-          render json: { status: false,
-                         message: 'without cash or already reverted' }
+          msg = 'Reversion failed account cash missing or accout desabled'
+          render json: { status: false, message: msg }
         end
+      end
+
+      def show
+        render json: @account_transaction if @account_transaction
       end
 
       private
 
-      def account_transaction_params
+      def ac_transaction_params
         params.require(:account_transaction).permit(:origin_account_id,
                                                     :destiny_account_id,
                                                     :amount)

@@ -15,7 +15,7 @@ RSpec.describe Api::V1::AccountTransactionsController, type: :request do
 
   describe 'post #create' do
     context 'with valid params' do
-      it 'create a account_transaction' do
+      it 'create an account_transaction' do
         post '/api/v1/account_transactions', params: @transaction_params
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['id']).to eq(AccountTransaction.last.id)
@@ -31,18 +31,28 @@ RSpec.describe Api::V1::AccountTransactionsController, type: :request do
     end
   end
 
-  describe 'delete #destroy' do
-    context 'with a persisted transaction' do
+  describe 'get #Revert' do
+    context 'only reverte transaction' do
       it 'reverse the transaction ' do
-        @account_transaction = create(:account_transaction, amount: 10.0)
-        @account_transaction.origin_account.amount_holded = 100.00
-        @account_transaction.origin_account.save
-        @account_transaction.destiny_account.amount_holded = 90.00
-        @account_transaction.destiny_account.save
-        delete "/api/v1/account_transactions/#{@account_transaction.id}"
-        @account_transaction.reload
-        expect(@account_transaction.status).to eq('reverted')
+        account_transaction = create(:account_transaction, amount: 10.0)
+        account_transaction.origin_account.amount_holded = 100.00
+        account_transaction.origin_account.save
+        account_transaction.destiny_account.amount_holded = 90.00
+        account_transaction.destiny_account.save
+        get "/api/v1/account_transactions/#{account_transaction.id}/revert"
+        account_transaction.reload
+        expect(account_transaction.status).to eq('reverted')
       end
+    end
+  end
+
+  describe 'put #Show' do
+    it 'consult a transaction' do
+      transaction = create(:account_transaction)
+      get "/api/v1/account_transactions/#{transaction.id}"
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['id']).to eq(transaction.id)
+      expect(parsed_response['amount'].to_f).to eql(transaction.amount.to_f)
     end
   end
 end
