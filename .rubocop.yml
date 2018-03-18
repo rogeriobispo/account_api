@@ -15,3 +15,5 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - 'spec/**/*'
+Style/SymbolArray:
+  Enabled: false

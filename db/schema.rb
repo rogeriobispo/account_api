@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180315191824) do
   create_table "account_transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "origin_account_id", null: false
     t.integer "destiny_account_id", null: false
-    t.decimal "amount", precision: 8, scale: 2, null: false
+    t.decimal "amount", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
