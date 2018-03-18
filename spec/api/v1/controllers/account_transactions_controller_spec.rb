@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::AccountTransactionsController, type: :request do
   before do
     origin_account = create(:account)
-    destiny_account = create(:account)
+    destiny_account = create(:destiny_account)
     @transaction_params = {
       account_transaction: {
         origin_account_id: origin_account.id,

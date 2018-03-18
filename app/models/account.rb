@@ -1,12 +1,13 @@
 class Account < ApplicationRecord
-  belongs_to :person
+  belongs_to :client
   has_many :account_relations
   has_many :above_ac, class_name: 'AccountRelation', foreign_key: 'below_ac_id'
   has_many :below_ac, class_name: 'AccountRelation', foreign_key: 'above_ac_id'
   has_many :account_transaction
-  validates :status, :kind, :amount_holded, :person, presence: true
+  validates :status, :kind, :amount_holded, :client, presence: true
   enum kind: [:parent_account, :subsidiary_account]
   enum status: [:active, :blocked, :canceled]
+
   def debit(amount)
     self.amount_holded -= amount if debit_permited?(amount)
   end

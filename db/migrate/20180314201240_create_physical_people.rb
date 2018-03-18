@@ -3,7 +3,6 @@ class CreatePhysicalPeople < ActiveRecord::Migration[5.1]
     create_table :physical_people do |t|
       t.string :cpf, limit: 11, null: false
       t.date :birthdate, null: false
-      t.references :person, foreign_key: true, null: false
 
       t.timestamps
     end

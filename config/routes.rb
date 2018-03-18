@@ -6,8 +6,9 @@ Rails.application.routes.draw do
       end
 
       post '/aports/revert', to: 'aports#revert'
-      resources :aports, only: [:create, :show] do
-      end
+      resources :aports, only: [:create, :show]
+
+      resources :clients, only: [:create, :show, :destroy,:update]
     end
   end
 end

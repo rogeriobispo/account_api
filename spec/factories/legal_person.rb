@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :legal_person do
-    cnpj Faker::CNPJ.numeric
+    cnpj CPF.generate
     social_reason FFaker::Company.name
-    person
   end
 end
