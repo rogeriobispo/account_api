@@ -29,4 +29,42 @@ class Account < ApplicationRecord
   def previous
     Account.where(id: parent_account.all.pluck(:parent_account_id))
   end
+
+  def all_relations
+    relations = []
+    relations << above_relations
+    relations << below_relations
+    relations.flatten!
+    relations.uniq!
+  end
+
+  private
+
+  def below_relations
+    accounts_relateds = []
+    current = self
+    accounts_relateds << current
+    current = current.next
+    while current.count.positive?
+      current.each do |c|
+        accounts_relateds << c
+      end
+      current = current.first.next
+    end
+    accounts_relateds
+  end
+
+  def above_relations
+    accounts_relateds = []
+    current = self
+    accounts_relateds << current
+    current = current.previous
+    while current.count.positive?
+      current.each do |c|
+        accounts_relateds << c
+      end
+      current = current.first.previous
+    end
+    accounts_relateds
+  end
 end

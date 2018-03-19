@@ -6,7 +6,9 @@ class AccountTransaction < ApplicationRecord
                                foreign_key: 'destiny_account_id'
   validates :origin_account_id, :destiny_account_id, :amount, presence: true
 
-  validates_with ParentTransactionValidator, ActiveAccountTransactionValidator
+  validates_with ParentTransactionValidator,
+                 ActiveAccountTransactionValidator,
+                 AccountTransactionSameBranchValidator
 
   enum status: [:created, :reverted]
   attr_reader :flag_aport

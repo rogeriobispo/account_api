@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::AccountTransactionsController, type: :request do
   before do
-    origin_account = create(:account)
-    destiny_account = create(:destiny_account)
+    @origin_account = create(:account)
+    @destiny_account = create(:destiny_account)
+    AccountRelation.create(parent_account: @origin_account, subsidiary_account: @destiny_account)
     @transaction_params = {
       account_transaction: {
-        origin_account_id: origin_account.id,
-        destiny_account_id: destiny_account.id,
+        origin_account_id: @origin_account.id,
+        destiny_account_id: @destiny_account.id,
         amount: '10'
       }
     }
@@ -34,11 +35,14 @@ RSpec.describe Api::V1::AccountTransactionsController, type: :request do
   describe 'get #Revert' do
     context 'only reverte transaction' do
       it 'reverse the transaction ' do
-        account_transaction = create(:account_transaction, amount: 10.0)
-        account_transaction.origin_account.amount_holded = 100.00
-        account_transaction.origin_account.save
-        account_transaction.destiny_account.amount_holded = 90.00
-        account_transaction.destiny_account.save
+        origin = create(:account)
+        destiny = create(:account)
+        AccountRelation.create(parent_account: origin, subsidiary_account: destiny)
+        account_transaction = create(:account_transaction, amount: 10.0, origin_account: origin, destiny_account: destiny)
+        origin.amount_holded = 100.00
+        origin.save
+        destiny.amount_holded = 90.00
+        destiny.save
         get "/api/v1/account_transactions/#{account_transaction.id}/revert"
         account_transaction.reload
         expect(account_transaction.status).to eq('reverted')
@@ -48,7 +52,7 @@ RSpec.describe Api::V1::AccountTransactionsController, type: :request do
 
   describe 'put #Show' do
     it 'consult a transaction' do
-      transaction = create(:account_transaction)
+      transaction = create(:account_transaction, amount: 10.0, origin_account: @origin_account, destiny_account: @destiny_account)
       get "/api/v1/account_transactions/#{transaction.id}"
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['id']).to eq(transaction.id)

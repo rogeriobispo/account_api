@@ -4,6 +4,8 @@ RSpec.describe Api::V1::AportsController, type: :request do
   before do
     origin_account = create(:account)
     destiny_account = create(:parent_account)
+    AccountRelation.create(parent_account: origin_account, subsidiary_account: destiny_account)
+    @transaction = create(:account_transaction, origin_account: destiny_account, destiny_account: origin_account)
     @aport_params = {
       account_transaction: {
         ac_transaction: {
@@ -46,7 +48,7 @@ RSpec.describe Api::V1::AportsController, type: :request do
 
     describe 'put #show' do
       it 'consult a aportTransaction' do
-        aport = create(:aport)
+        aport = create(:aport, account_transaction: @transaction)
         get "/api/v1/aports/#{aport.id}"
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['aport']['code']).to eq(aport.code)
@@ -55,7 +57,7 @@ RSpec.describe Api::V1::AportsController, type: :request do
 
     describe 'post #revert' do
       it 'revert transaction successefuly' do
-        aport = create(:aport)
+        aport = create(:aport, account_transaction: @transaction)
         aport.account_transaction.origin_account.amount_holded = 100.00
         aport.account_transaction.origin_account.save
         aport.account_transaction.destiny_account.amount_holded = 90.00

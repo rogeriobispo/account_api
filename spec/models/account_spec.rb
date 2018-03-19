@@ -63,4 +63,23 @@ RSpec.describe Account, type: :model do
       expect(subs_account.previous).to include(par_account)
     end
   end
+
+  describe '#all_relations' do
+    it 'returna a tree of relations do' do
+      par_acc = create(:parent_account)
+      subs_acc1 = create(:subsidiary_account)
+      subs_acc2 = create(:subsidiary_account)
+      subs_acc3 = create(:subsidiary_account)
+      subs_acc4 = create(:subsidiary_account)
+      subs_acc5 = create(:subsidiary_account)
+      create(:account_relation, parent_account: par_acc, subsidiary_account: subs_acc1)
+      create(:account_relation, parent_account: subs_acc1, subsidiary_account: subs_acc2)
+      create(:account_relation, parent_account: subs_acc2, subsidiary_account: subs_acc3)
+      create(:account_relation, parent_account: subs_acc3, subsidiary_account: subs_acc4)
+      create(:account_relation, parent_account: subs_acc4, subsidiary_account: subs_acc5)
+      relations = par_acc.all_relations
+      expect(relations.count).to eq(6)
+      expect(relations).to include(subs_acc5)
+    end
+  end
 end

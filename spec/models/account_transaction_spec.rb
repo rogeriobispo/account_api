@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe AccountTransaction, type: :model do
   before :each do
-    @account_transaction = create(:created_account_transaction, amount: 10.0)
+    par_ac = create(:account, amount_holded: 5000)
+    sub_ac = create(:account, amount_holded: 5000)
+    AccountRelation.create(parent_account: par_ac, subsidiary_account: sub_ac)
+    @account_transaction = create(:created_account_transaction, amount: 10.0, origin_account: par_ac, destiny_account: sub_ac)
   end
 
   describe '#reverse' do
@@ -39,9 +42,18 @@ RSpec.describe AccountTransaction, type: :model do
 
     it 'only active account are able to transact' do
       bloc_account = create(:blocked_account)
+      create(:account)
       transaction = AccountTransaction.new(false, destiny_account: bloc_account)
       transaction.valid?
       expect(transaction.errors).to include(:active_account)
+    end
+
+    it 'only account at the same branch can transact' do
+      or_ac = create(:account)
+      de_ac = create(:account)
+      transaction = AccountTransaction.new(false, origin_account: or_ac, destiny_account: de_ac)
+      transaction.valid?
+      expect(transaction.errors).to include(:same_branch)
     end
   end
 end
