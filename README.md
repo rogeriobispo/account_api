@@ -37,7 +37,7 @@
   * apenas account na mesma raiz pode fazer transferências.
 
   * Impedimento
-    não consegui tempo suficiente.
+    time was over..
 
 ## Modelagem de dados
 
