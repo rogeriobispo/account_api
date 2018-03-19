@@ -26,7 +26,6 @@ FactoryBot.define do
     end
 
     factory :subsidiary_account do
-
       after(:create) do |ac|
         ac.credit(4000.00)
       end

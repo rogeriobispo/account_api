@@ -48,7 +48,8 @@ RSpec.describe Account, type: :model do
     it 'when account has a child account' do
       par_account = create(:parent_account)
       subs_account = create(:subsidiary_account)
-      AccountRelation.create(parent_account: par_account, subsidiary_account: subs_account)
+      AccountRelation.create(parent_account: par_account,
+                             subsidiary_account: subs_account)
       expect(par_account.next).to include(subs_account)
     end
   end
@@ -57,7 +58,8 @@ RSpec.describe Account, type: :model do
     it 'when account has a parent account' do
       par_account = create(:parent_account)
       subs_account = create(:subsidiary_account)
-      AccountRelation.create(parent_account: par_account, subsidiary_account: subs_account)
+      AccountRelation.create(parent_account: par_account,
+                             subsidiary_account: subs_account)
       expect(subs_account.previous).to include(par_account)
     end
   end

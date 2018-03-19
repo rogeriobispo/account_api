@@ -4,10 +4,10 @@ class LegalPerson < ApplicationRecord
 
   def formated_person
     {
-      id: self.client.id,
-      name: self.client.name,
-      cnpj: self.cnpj,
-      social_reason: self.social_reason
+      id: client.id,
+      name: client.name,
+      cnpj: cnpj,
+      social_reason: social_reason
     }
   end
 end

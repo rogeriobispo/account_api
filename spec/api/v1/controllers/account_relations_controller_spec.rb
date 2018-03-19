@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::AccountRelationsController , type: :request do
+RSpec.describe Api::V1::AccountRelationsController, type: :request do
   before do
     origin_account = create(:account)
     destiny_account = create(:destiny_account)
     @account_relation_params = {
       account_relation: {
-          parent_account_id: origin_account.id,
-          subsidiary_account_id: destiny_account.id
-        }
+        parent_account_id: origin_account.id,
+        subsidiary_account_id: destiny_account.id
+      }
     }
   end
 
@@ -34,7 +34,7 @@ RSpec.describe Api::V1::AccountRelationsController , type: :request do
       context 'delete a relation' do
         it 'successfully' do
           relation = create(:account_relation)
-          delete "/api/v1/account_relations", params: {id: relation.id}
+          delete '/api/v1/account_relations', params: { id: relation.id }
           expect(response.status).to eq(200)
         end
       end

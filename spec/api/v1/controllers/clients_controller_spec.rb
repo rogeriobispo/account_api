@@ -3,22 +3,21 @@ require 'rails_helper'
 RSpec.describe Api::V1::ClientsController, type: :request do
   before do
     @legal_person_param = { person: {
-        name: FFaker::Lorem.word,
-        cnpj: CNPJ.generate,
-        social_reason: FFaker::Lorem.word
-      }
-    }
+      name: FFaker::Lorem.word,
+      cnpj: CNPJ.generate,
+      social_reason: FFaker::Lorem.word
+    } }
 
     @invalid_legal_person_param = { person: { name: nil, cnpj: nil,
                                               social_reason: nil } }
-     @physical_person_param = { person: {
-         name: FFaker::Lorem.word,
-         cpf: CPF.generate,
-         birthdate: '1983-08-11'
-      }
-    }
+    @physical_person_param = { person: {
+      name: FFaker::Lorem.word,
+      cpf: CPF.generate,
+      birthdate: '1983-08-11'
+    } }
 
-    @invalid_physical_person_param = { person: { name: nil, cpf: nil, birthdate: nil } }
+    @invalid_physical_person_param = { person: { name: nil,
+                                                 cpf: nil, birthdate: nil } }
 
     @legal_person = create(:client, :leg_person)
     @physical_person = create(:client, :phy_person)
@@ -60,10 +59,10 @@ RSpec.describe Api::V1::ClientsController, type: :request do
     context 'update a legal person' do
       it 'successfully' do
         client = @legal_person
-        hash_param = { person: {id: client.id,
-                      social_reason: client.person.social_reason,
-                       name: 'Rogério Bispo ME',
-                       cnpj: '2155'} }
+        hash_param = { person: { id: client.id,
+                                 social_reason: client.person.social_reason,
+                                 name: 'Rogério Bispo ME',
+                                 cnpj: '2155' } }
         patch "/api/v1/clients/#{client.id}", params: hash_param
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['id']).to eq(client.id)
@@ -76,9 +75,9 @@ RSpec.describe Api::V1::ClientsController, type: :request do
     context 'update a physical person' do
       it 'successfully' do
         client = @physical_person
-        hash_param = { person: {id: client.id,
-                       name: 'Rogério Bispo',
-                       cpf: '24411'} }
+        hash_param = { person: { id: client.id,
+                                 name: 'Rogério Bispo',
+                                 cpf: '24411' } }
         patch "/api/v1/clients/#{client.id}", params: hash_param
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['id']).to eq(client.id)

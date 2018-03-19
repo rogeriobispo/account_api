@@ -5,10 +5,10 @@ class PhysicalPerson < ApplicationRecord
 
   def formated_person
     {
-      id: self.client.id,
-      name: self.client.name,
-      cpf: self.cpf,
-      birthdate: self.birthdate
-     }
+      id: client.id,
+      name: client.name,
+      cpf: cpf,
+      birthdate: birthdate
+    }
   end
 end

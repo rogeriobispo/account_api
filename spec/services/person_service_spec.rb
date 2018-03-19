@@ -10,11 +10,11 @@ RSpec.describe AportService, type: :service do
       social_reason: FFaker::Lorem.word
     )
 
-     @physical_person_param = ActionController::Parameters.new(
-       name: FFaker::Lorem.word,
-       cpf: CPF.generate,
-       birthdate: '1983-08-11'
-     )
+    @physical_person_param = ActionController::Parameters.new(
+      name: FFaker::Lorem.word,
+      cpf: CPF.generate,
+      birthdate: '1983-08-11'
+    )
   end
 
   describe '#call' do
@@ -28,5 +28,4 @@ RSpec.describe AportService, type: :service do
       expect(client.person.class).to be(PhysicalPerson)
     end
   end
-
 end

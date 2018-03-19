@@ -4,20 +4,18 @@ RSpec.describe Api::V1::AccountsController, type: :request do
   before do
     client = create(:client)
     @account_param = { account: {
-       kind: 'parent_account',
-       status: 'active',
-       client_id: client.id,
-       amount_holded: 10.0
-      }
-   }
+      kind: 'parent_account',
+      status: 'active',
+      client_id: client.id,
+      amount_holded: 10.0
+    } }
 
     @invalid_account = { account: {
-       kind: 'parent_account',
-       status: 'active',
-       client_id: 'A',
-       amount_holded: 10.0
-      }
-   }
+      kind: 'parent_account',
+      status: 'active',
+      client_id: 'A',
+      amount_holded: 10.0
+    } }
   end
 
   describe 'post #create' do
@@ -41,10 +39,10 @@ RSpec.describe Api::V1::AccountsController, type: :request do
         account = create(:account)
         client = create(:client)
         hash_param = { account: { id: account.id,
-                       kind: 'parent_account',
-                       status: 'canceled',
-                       amount_holded: 5.0,
-                       client_id: client.id } }
+                                  kind: 'parent_account',
+                                  status: 'canceled',
+                                  amount_holded: 5.0,
+                                  client_id: client.id } }
         patch "/api/v1/accounts/#{account.id}", params: hash_param
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['id']).to eq(account.id)

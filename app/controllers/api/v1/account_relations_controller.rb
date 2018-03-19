@@ -19,7 +19,8 @@ module Api
       private
 
       def ac_relation_params
-        params.require(:account_relation).permit(:parent_account_id, :subsidiary_account_id)
+        params.require(:account_relation).permit(:parent_account_id,
+                                                 :subsidiary_account_id)
       end
 
       def set_account_relation

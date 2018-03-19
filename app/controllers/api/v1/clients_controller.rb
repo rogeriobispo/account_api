@@ -39,7 +39,6 @@ module Api
       def set_person
         @client = Client.find(params[:id])
       end
-
     end
   end
 end

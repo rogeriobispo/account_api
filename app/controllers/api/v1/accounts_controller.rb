@@ -14,6 +14,7 @@ module Api
       def show
         render json: @account
       end
+
       def update
         if @account.update(account_params)
           render json: @account
@@ -25,7 +26,9 @@ module Api
       private
 
       def account_params
-        params.require(:account).permit(:status, :kind, :client_id, :amount_holded)
+        params.require(:account).permit(:status,
+                                        :kind,
+                                        :client_id, :amount_holded)
       end
 
       def set_account

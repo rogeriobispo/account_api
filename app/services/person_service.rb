@@ -1,11 +1,9 @@
 class PersonService
-
   def initialize(person_param, update = false, client = nil)
     @person_param = person_param
     @update = update
     @client = client
   end
-
 
   def call
     if @update
@@ -33,13 +31,13 @@ class PersonService
   end
 
   def update_legal_person
-      @client.person.update(legal_person_hash)
-      @client.tap{ |c|  c.update(client_hash(@client.person) ) }
+    @client.person.update(legal_person_hash)
+    @client.tap { |c| c.update(client_hash(@client.person)) }
   end
 
   def update_physical_person
-      @client.person.update(physical_person_hash)
-      @client.tap{ |c|  c.update(client_hash(@client.person) ) }
+    @client.person.update(physical_person_hash)
+    @client.tap { |c| c.update(client_hash(@client.person)) }
   end
 
   def create_legal_person
@@ -48,8 +46,7 @@ class PersonService
 
   def legal_person_hash
     { cnpj: @person_param[:cnpj],
-      social_reason: @person_param[:social_reason]
-    }
+      social_reason: @person_param[:social_reason] }
   end
 
   def create_client(person)
