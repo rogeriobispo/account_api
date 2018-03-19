@@ -37,6 +37,8 @@
   * apenas account na mesma raiz pode fazer transferências.
 
   * Impedimento
-    não consegue tempo suficiente para pensar em um solução de linkedlist
+    time was over..
 
 ## Modelagem de dados
+
+![img](https://github.com/rogeriobispo/account_api/blob/master/public/dbproject.png)
