@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resource :account_relations, only: [:create, :destroy]
 
       resources :clients, only: [:create, :show, :destroy,:update]
+      resources :accounts, only: [:create, :show, :update]
     end
   end
 end
