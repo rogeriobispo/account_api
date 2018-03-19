@@ -17,7 +17,7 @@
     * bundle install
     * rails db:create
     * rails db:migrate
-    * rails c
+    * rails s
 
 ## Server up
     * rails c
