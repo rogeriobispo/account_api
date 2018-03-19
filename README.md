@@ -1,24 +1,42 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Motivation
+  A Simple acount transactions api.
 
-Things you may want to cover:
+## badges
+  [![CodeClimate](https://api.codeclimate.com/v1/badges/2945d5d7e3e4d3ad2044/maintainability)](https://codeclimate.com/github/rogeriobispo/account_api/maintainability)
 
-* Ruby version
+## Requiriments
+    * Ruby Version: 2.5.0
+    * Rails 5.1.5
+    * mysql 5.1.21
 
-* System dependencies
 
-* Configuration
+## Setup
+    * git@github.com:rogeriobispo/account_api.git
+    * bundle install
+    * rails db:create
+    * rails db:migrate
+    * rails c
 
-* Database creation
+## Server up
+    * rails c
 
-* Database initialization
+## Database creation
+    * rails db:create
 
-* How to run the test suite
+## DataBase Initialization
+    * rails db:create
+    * rails db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+## How to run Test Suite
+    * rspec -fd
 
-* Deployment instructions
 
-* ...
+## Feature não implementada
+  * apenas account na mesma raiz pode fazer transferências.
+
+  * Impedimento
+    não consegue tempo suficiente para pensar em um solução de linkedlist
+
+## Modelagem de dados
