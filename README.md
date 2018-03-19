@@ -20,7 +20,7 @@
     * rails s
 
 ## Server up
-    * rails c
+    * rails s
 
 ## Database creation
     * rails db:create
