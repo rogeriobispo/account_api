@@ -38,6 +38,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     ast (2.4.0)
     builder (3.2.3)
@@ -59,6 +61,8 @@ GEM
       activesupport (>= 4.2.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    json-schema (2.8.0)
+      addressable (>= 2.4)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -88,6 +92,7 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
+    public_suffix (3.0.2)
     puma (3.11.3)
     rack (2.0.4)
     rack-test (0.8.3)
@@ -137,6 +142,19 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    rswag (2.0.3)
+      rswag-api (= 2.0.3)
+      rswag-specs (= 2.0.3)
+      rswag-ui (= 2.0.3)
+    rswag-api (2.0.3)
+      railties (>= 3.1, < 6.0)
+    rswag-specs (2.0.3)
+      activesupport (>= 3.1, < 6.0)
+      json-schema (~> 2.2)
+      railties (>= 3.1, < 6.0)
+    rswag-ui (2.0.3)
+      actionpack (>= 3.1, < 6.0)
+      railties (>= 3.1, < 6.0)
     rubocop (0.52.1)
       parallel (~> 1.10)
       parser (>= 2.4.0.2, < 3.0)
@@ -181,10 +199,11 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.4)
   rspec-rails (~> 3.7)
+  rswag
   rubocop
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
